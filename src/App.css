@@ -1,53 +1,109 @@
-.App {
-  background-color: #1a1a2e; /* dark meditative background */
-  color: #f0f0f0; /* light font color */
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
+/* General Body */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #1a1a2e; /* deep dark blue/purple background */
+  color: #e0d4f7; /* soft purple text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* App Container */
+.App {
+  width: 90%;
+  max-width: 900px;
+  text-align: center;
+}
+
+/* Header and Logo */
+.App-header {
+  margin-bottom: 30px;
 }
 
 .logo {
-  text-align: center;
-  margin-bottom: 32px;
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 10px;
 }
 
-.logo h1 {
-  font-size: 2.8rem;
-  font-weight: 600;
-  color: #ffffff;
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #b39ddb;
 }
 
-.logo .tagline {
-  font-size: 1rem;
-  opacity: 0.8;
-  font-style: italic;
-  color: #dcdcdc;
+.tagline {
+  font-size: 1.2rem;
+  color: #d1c4e9;
+  margin-bottom: 40px;
 }
 
-.question-block {
+/* Question Box */
+.question-box {
+  background: #2c2c54; /* slightly lighter dark blue */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 20px #000;
   width: 100%;
-  max-width: 600px;
-  margin-bottom: 2rem;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .question {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
 }
 
-input,
-textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border-radius: 6px;
+.answer-box {
+  flex: 1;
+  padding: 15px;
+  border-radius: 10px;
   border: none;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  background: #3b3b98;
+  color: #fff;
+  resize: none;
 }
 
-.complete-button {
-  margin-top: 2rem;
+/* Navigation Buttons */
+.navigation {
+  margin-top: 20px;
 }
+
+button {
+  padding: 10px 25px;
+  margin: 0 10px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #6a1b9a; /* purple button */
+  color: #fff;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #9c27b0;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 600px) {
+  .question-box {
+    min-height: 300px;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .question {
+    font-size: 1.1rem;
+  }
+}
+
