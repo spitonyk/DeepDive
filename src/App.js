@@ -1,91 +1,62 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
-const questions = [
-  {
-    title: "Invite the Holy Spirit",
-    prompt:
-      "Take a quiet moment and invite the Holy Spirit to guide you into truth as you study this passage."
-  },
-  {
-    title: "SEE",
-    prompt:
-      "What did you SEE? What did you hear? What did you feel as you read the passage?"
-  },
-  {
-    title: "BELIEVE",
-    prompt:
-      "If this passage is true, what must you CHANGE in your beliefs to align your thinking with what Scripture teaches?"
-  },
-  {
-    title: "LEARN",
-    prompt:
-      "What lesson is God teaching you through this passage?"
-  },
-  {
-    title: "OBEY",
-    prompt:
-      "What specific step of obedience is the Holy Spirit inviting you into today?"
-  },
-  {
-    title: "LIVING IT OUT",
-    prompt:
-      "Where or when will this be hardest to live out?"
-  },
-  {
-    title: "PREPARE",
-    prompt:
-      "What story or phrase will you tell yourself in that moment to stay aligned with obedience?"
-  },
-  {
-    title: "SPEAK IT — Identity Alignment",
-    prompt:
-      "Reword the lesson into a present-tense truth you can speak over yourself. Use “I am…” rather than “I will…”."
-  },
-  {
-    title: "CONFIRM",
-    prompt:
-      "Who can you share this with for encouragement or accountability?"
-  }
-];
-
 function App() {
-  const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState(Array(questions.length).fill(""));
+  // State for the first input: Scripture passage
+  const [scripture, setScripture] = useState("");
 
-  const handleChange = (e) => {
-    const newAnswers = [...answers];
-    newAnswers[step] = e.target.value;
-    setAnswers(newAnswers);
-  };
+  // Example state for other questions (can expand later)
+  const [answer, setAnswer] = useState("");
 
   return (
-    <div className="app">
-      <div className="card">
-        <h2>{questions[step].title}</h2>
-        <p>{questions[step].prompt}</p>
+    <div className="App">
+      {/* Logo Section */}
+      <div className="logo">
+        <h1>Deep Dive</h1>
+        <p className="tagline">Transformation happens in the deep</p>
+      </div>
 
-        <textarea
-          value={answers[step]}
-          onChange={handleChange}
-          placeholder="Type your response here..."
+      {/* Holy Spirit Invitation */}
+      <div className="invitation">
+        <p>
+          Let’s invite the Holy Spirit to guide us through this Deep Dive into
+          His Word.
+        </p>
+      </div>
+
+      {/* Scripture Passage Input */}
+      <div className="question-block">
+        <label className="question">
+          What passage of Scripture will you be studying today?
+        </label>
+        <input
+          type="text"
+          placeholder="Example: Isaiah 6, Joshua 1:9, Ephesians 5:25–33"
+          value={scripture}
+          onChange={(e) => setScripture(e.target.value)}
         />
+      </div>
 
-        <div className="buttons">
-          {step > 0 && (
-            <button onClick={() => setStep(step - 1)}>Back</button>
-          )}
-          {step < questions.length - 1 ? (
-            <button onClick={() => setStep(step + 1)}>Next</button>
-          ) : (
-            <button disabled>Complete</button>
-          )}
-        </div>
+      {/* Example placeholder for the first reflection question */}
+      <div className="question-block">
+        <label className="question">
+          What did you see, hear, or feel as you read this passage?
+        </label>
+        <textarea
+          placeholder="Type your response here..."
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+        />
+      </div>
+
+      {/* Complete Button Placeholder */}
+      <div className="complete-button">
+        <button onClick={() => alert("Complete button pressed!")}>
+          Complete
+        </button>
       </div>
     </div>
   );
 }
 
 export default App;
-
-
