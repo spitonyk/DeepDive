@@ -1,109 +1,193 @@
-/* General Body */
-body, html, #root {
+/* RESET */
+* { box-sizing: border-box; }
+
+body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #1a1a2e; /* deep dark blue/purple background */
-  color: #e0d4f7; /* soft purple text */
+  background: linear-gradient(180deg, #0f172a, #020617);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #e5e7eb;
+}
+
+/* APP WRAPPER */
+.app {
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-}
-
-/* App Container */
-.App {
-  width: 90%;
-  max-width: 900px;
-  text-align: center;
-}
-
-/* Header and Logo */
-.App-header {
-  margin-bottom: 30px;
-}
-
-.logo {
-  max-width: 200px;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  color: #b39ddb;
-}
-
-.tagline {
-  font-size: 1.2rem;
-  color: #d1c4e9;
-  margin-bottom: 40px;
-}
-
-/* Question Box */
-.question-box {
-  background: #2c2c54; /* slightly lighter dark blue */
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0px 0px 20px #000;
-  width: 100%;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
+  padding: 2rem;
+}
+
+/* MAIN CARD */
+.card {
+  background: rgba(15, 23, 42, 0.95);
+  width: 100%;
+  max-width: 820px;
+  padding: 3rem;
+  border-radius: 18px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.65);
+}
+
+/* LOGO */
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+}
+
+.logo-image {
+  /* ~2x larger + responsive */
+  width: clamp(240px, 35vw, 520px);
+  height: auto;
+  background: transparent;
+}
+
+/* INTRO TEXT */
+.invitation {
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #c7d2fe;
+  margin-bottom: 2.25rem;
+}
+
+/* STEP HEADER */
+.step-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.step-title {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #e0e7ff;
+}
+
+.step-count {
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+/* QUESTION BLOCKS */
+.question-block {
+  margin-bottom: 2rem;
 }
 
 .question {
-  font-size: 1.3rem;
-  margin-bottom: 20px;
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #e0e7ff;
 }
 
-.answer-box {
-  flex: 1;
-  padding: 15px;
-  border-radius: 10px;
-  border: none;
-  font-size: 1.1rem;
-  background: #3b3b98;
-  color: #fff;
-  resize: none;
-}
-
-/* Navigation Buttons */
-.navigation {
-  margin-top: 20px;
-}
-
-button {
-  padding: 10px 25px;
-  margin: 0 10px;
+/* INPUTS */
+input,
+textarea {
+  width: 100%;
+  background: #020617;
+  color: #f8fafc;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 0.95rem 1rem;
   font-size: 1rem;
-  border-radius: 10px;
-  border: none;
+  font-family: inherit;
+}
+
+textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #64748b;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #818cf8;
+}
+
+/* BUTTONS */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.primary-button,
+.secondary-button {
+  padding: 0.75rem 2.2rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  background-color: #6a1b9a; /* purple button */
-  color: #fff;
-  transition: background 0.3s;
+  border: none;
+  transition: background 0.2s ease, transform 0.05s ease;
 }
 
-button:hover {
-  background-color: #9c27b0;
+.primary-button {
+  background: #6366f1;
+  color: white;
 }
 
-/* Responsive for Mobile */
+.primary-button:hover {
+  background: #818cf8;
+}
+
+.primary-button:active,
+.secondary-button:active {
+  transform: translateY(1px);
+}
+
+.primary-button:disabled {
+  background: #334155;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  background: rgba(148, 163, 184, 0.15);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.secondary-button:hover {
+  background: rgba(148, 163, 184, 0.22);
+}
+
+/* COMPLETE PAGE */
+.complete-title {
+  margin: 0 0 0.5rem 0;
+  color: #e0e7ff;
+}
+
+.complete-subtitle {
+  margin: 0 0 2rem 0;
+  color: #c7d2fe;
+}
+
+.complete-scripture {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* MOBILE TWEAKS */
 @media (max-width: 600px) {
-  .question-box {
-    min-height: 300px;
-    padding: 20px;
+  .card {
+    padding: 2rem;
   }
 
-  h1 {
-    font-size: 2rem;
+  .buttons {
+    flex-direction: column;
   }
 
-  .question {
-    font-size: 1.1rem;
+  .primary-button,
+  .secondary-button {
+    width: 100%;
   }
 }
+
 
