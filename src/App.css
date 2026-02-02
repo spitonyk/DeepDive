@@ -36,11 +36,11 @@ body {
 }
 
 .logo-image {
-  /* ~2x larger + responsive */
-  width: clamp(240px, 35vw, 520px);
+  width: clamp(320px, 55vw, 640px);
   height: auto;
   background: transparent;
 }
+
 
 /* INTRO TEXT */
 .invitation {
