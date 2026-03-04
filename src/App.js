@@ -179,9 +179,9 @@ export default function App() {
       doc.text("Transformation happens in the deep.", pageWidth / 2, doc.internal.pageSize.getHeight() - 10, { align: "center" });
     }
 
-    const truncatedScripture = scripture.length > 50 ? scripture.substring(0, 50) : scripture;
-const fileName = `Deep_Dive_${truncatedScripture.replace(/[^a-z0-9]/gi, '_')}.pdf`;
-  };
+   // Save with scripture reference in filename (truncated to 50 chars)
+const truncatedScripture = scripture.length > 50 ? scripture.substring(0, 50) : scripture;
+doc.save(`Deep_Dive_${truncatedScripture.replace(/[^a-z0-9]/gi, '_')}.pdf`);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 flex items-center justify-center p-4">
