@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BookOpen, ArrowRight, ArrowLeft, CheckCircle2, RotateCcw, Download, Library, Trash2, X } from "lucide-react";
 import jsPDF from "jspdf";
-import "./App.css";
 
 const questions = [
   {
@@ -46,7 +45,6 @@ export default function App() {
   const [showLibrary, setShowLibrary] = useState(false);
   const [savedStudies, setSavedStudies] = useState([]);
 
-  // Load saved studies from localStorage
   useEffect(() => {
     const stored = localStorage.getItem("deepDiveStudies");
     if (stored) {
@@ -61,7 +59,6 @@ export default function App() {
   };
 
   const handleComplete = () => {
-    // Save to library
     const newStudy = {
       id: Date.now().toString(),
       date: new Date().toLocaleDateString('en-US', { 
@@ -107,13 +104,11 @@ export default function App() {
     const maxWidth = pageWidth - (margin * 2);
     let yPosition = 20;
 
-    // Title
     doc.setFontSize(20);
     doc.setFont("helvetica", "bold");
     doc.text("Deep Dive — Full Study", margin, yPosition);
     yPosition += 10;
 
-    // Date
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     doc.text(new Date().toLocaleDateString('en-US', { 
@@ -123,7 +118,6 @@ export default function App() {
     }), margin, yPosition);
     yPosition += 15;
 
-    // Scripture
     doc.setFontSize(14);
     doc.setFont("helvetica", "bold");
     doc.text("Passage", margin, yPosition);
@@ -135,34 +129,28 @@ export default function App() {
     doc.text(scriptureLines, margin, yPosition);
     yPosition += (scriptureLines.length * 6) + 10;
 
-    // Questions and Answers
     questions.forEach((question, index) => {
-      // Check if we need a new page
       if (yPosition > 250) {
         doc.addPage();
         yPosition = 20;
       }
 
-      // Question Title
       doc.setFontSize(12);
       doc.setFont("helvetica", "bold");
       doc.text(question.title, margin, yPosition);
       yPosition += 7;
 
-      // Question Prompt
       doc.setFontSize(10);
       doc.setFont("helvetica", "italic");
       const promptLines = doc.splitTextToSize(question.prompt, maxWidth);
       doc.text(promptLines, margin, yPosition);
       yPosition += (promptLines.length * 5) + 5;
 
-      // Answer Header
       doc.setFontSize(10);
       doc.setFont("helvetica", "bold");
       doc.text("My Response", margin, yPosition);
       yPosition += 6;
 
-      // Answer
       doc.setFont("helvetica", "normal");
       const answerText = answers[index] || "(No response)";
       const answerLines = doc.splitTextToSize(answerText, maxWidth);
@@ -170,7 +158,6 @@ export default function App() {
       yPosition += (answerLines.length * 5) + 12;
     });
 
-    // Footer
     const pageCount = doc.getNumberOfPages();
     doc.setFontSize(9);
     doc.setFont("helvetica", "italic");
@@ -179,16 +166,15 @@ export default function App() {
       doc.text("Transformation happens in the deep.", pageWidth / 2, doc.internal.pageSize.getHeight() - 10, { align: "center" });
     }
 
-   // Save with scripture reference in filename (truncated to 50 chars)
-const truncatedScripture = scripture.length > 50 ? scripture.substring(0, 50) : scripture;
-doc.save(`Deep_Dive_${truncatedScripture.replace(/[^a-z0-9]/gi, '_')}.pdf`);
+    const truncatedScripture = scripture.length > 50 ? scripture.substring(0, 50) : scripture;
+    doc.save(`Deep_Dive_${truncatedScripture.replace(/[^a-z0-9]/gi, '_')}.pdf`);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
         <div className="bg-slate-900/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden border border-slate-800">
           
-          {/* Header with background image */}
           <div className="relative h-48 bg-gradient-to-br from-blue-900 to-indigo-950 overflow-hidden">
             <img 
               src="https://images.unsplash.com/photo-1675223894754-7b0af6c38a90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bmRlcndhdGVyJTIwc3VuYmVhbXMlMjBsaWdodCUyMHJheXMlMjBjbGVhciUyMGJsdWV8ZW58MXx8fHwxNzcyMDgyNjk5fDA&ixlib=rb-4.1.0&q=80&w=1080"
@@ -203,7 +189,6 @@ doc.save(`Deep_Dive_${truncatedScripture.replace(/[^a-z0-9]/gi, '_')}.pdf`);
               <p className="text-slate-200 text-lg">Transformation happens in the deep</p>
             </div>
             
-            {/* Library Button */}
             <button
               onClick={() => setShowLibrary(true)}
               className="absolute top-4 right-4 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-3 rounded-full transition-all border border-white/20"
@@ -212,7 +197,6 @@ doc.save(`Deep_Dive_${truncatedScripture.replace(/[^a-z0-9]/gi, '_')}.pdf`);
             </button>
           </div>
 
-          {/* Progress Bar */}
           {!isComplete && step > 0 && (
             <div className="bg-slate-800 h-2">
               <div 
@@ -222,10 +206,8 @@ doc.save(`Deep_Dive_${truncatedScripture.replace(/[^a-z0-9]/gi, '_')}.pdf`);
             </div>
           )}
 
-          {/* Content */}
           <div className="p-8 md:p-12">
             {isComplete ? (
-              // Summary Screen
               <div className="space-y-6">
                 <div className="text-center mb-8">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-green-900/50 rounded-full mb-4">
@@ -267,7 +249,6 @@ doc.save(`Deep_Dive_${truncatedScripture.replace(/[^a-z0-9]/gi, '_')}.pdf`);
                 </div>
               </div>
             ) : step === 0 ? (
-              // Welcome Screen
               <div className="space-y-6">
                 <div className="text-center mb-8">
                   <p className="text-slate-300 text-lg leading-relaxed">
@@ -298,7 +279,6 @@ doc.save(`Deep_Dive_${truncatedScripture.replace(/[^a-z0-9]/gi, '_')}.pdf`);
                 </button>
               </div>
             ) : (
-              // Question Screen
               <div className="space-y-6">
                 <div className="text-center mb-6">
                   <div className="inline-block bg-indigo-900/50 text-indigo-300 px-4 py-2 rounded-full text-sm font-semibold mb-4 border border-indigo-800">
@@ -358,7 +338,6 @@ doc.save(`Deep_Dive_${truncatedScripture.replace(/[^a-z0-9]/gi, '_')}.pdf`);
           </div>
         </div>
 
-        {/* Library Modal */}
         {showLibrary && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
             <div className="bg-slate-900 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden border border-slate-800 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
@@ -430,7 +409,6 @@ doc.save(`Deep_Dive_${truncatedScripture.replace(/[^a-z0-9]/gi, '_')}.pdf`);
           </div>
         )}
 
-        {/* Footer */}
         <p className="text-center text-slate-400 mt-6 text-sm">
           "For the word of God is alive and active..." — Hebrews 4:12
         </p>
