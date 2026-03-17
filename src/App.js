@@ -9,7 +9,7 @@ const questions = [
   },
   {
     title: "BELIEVE",
-    prompt: "If this passage is true, what must you CHANGE in your beliefs to align your thinking with what Scripture teaches?"
+    prompt: "Now that you are aware of this Truth, in Gods word, what must you CHANGE in your beliefs to align your thinking with what this passage teaches?"
   },
   {
     title: "LEARN",
